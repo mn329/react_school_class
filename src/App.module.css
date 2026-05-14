@@ -1,0 +1,44 @@
+/* src/App.module.css */
+.app {
+  --app-bg: #f9fafb;
+  --surface: #ffffff;
+  --surface-muted: #f3f4f6;
+  --border: #e5e7eb;
+  --border-strong: #d1d5db;
+  --text: #111827;
+  --text-muted: #374151;
+  --text-soft: #6b7280;
+  --text-faint: #9ca3af;
+  --accent: #1f2937;
+  --accent-contrast: #ffffff;
+  --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.08);
+  min-height: 100vh;
+  background: var(--app-bg);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.main {
+  flex: 1;
+  padding: 2rem 1.5rem;
+  max-width: 960px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.sectionTitle {
+  color: var(--text);
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  padding-left: 0.75rem;
+  border-left: 4px solid #3b82f6;
+}
+
+.error {
+  text-align: center;
+  color: #e11d48;
+  padding: 3rem 0;
+}
