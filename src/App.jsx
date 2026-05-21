@@ -15,17 +15,20 @@ function App() {
   // const [変数名, set変数名] = useState(初期値)
   const [selectedWork, setSelectedWork] = useState(null)
   const [query, setQuery] = useState("")
+  const [selectedGenre, setSelectedGenre] = useState('すべて')
+  // ジャンルのリストをworksから抜き出す
+  const genres = ['すべて', ...new Set(works.map((w) => w.genre))]
 
-
+  const filteredWorks = works.filter((work) => work.title.includes(query) && (selectedGenre === 'すべて' || work.genre === selectedGenre))
 
   return (
     <div className={styles.app}>
       <Header />
-      <SearchBar query={query} setQuery={setQuery} />
+      <SearchBar query={query} onQueryChange={setQuery}  genres={genres} selectedGenre={selectedGenre} onGenreChange={setSelectedGenre}/>
       <main className={styles.main}>
-        <h2 className={styles.sectionTitle}>注目作品</h2>
+        <h2 className={styles.sectionTitle}>作品リスト</h2>
         {/* WorkList コンポーネント表示 */}
-        <WorkList works={works} onSelect={(work) => setSelectedWork(work)} />
+        <WorkList works={filteredWorks} onSelect={(work) => setSelectedWork(work)} />
       </main>
 
       <Footer />
