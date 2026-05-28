@@ -9,6 +9,7 @@ import SearchBar from './components/SearchBar'
 import WorkList from './components/WorkList'
 // モックデータの読み込み
 import { works } from './data/works'
+import { useEffect } from 'react'
 
 function App() {
   // 選択された作品のstate
@@ -20,6 +21,18 @@ function App() {
   const genres = ['すべて', ...new Set(works.map((w) => w.genre))]
 
   const filteredWorks = works.filter((work) => work.title.includes(query) && (selectedGenre === 'すべて' || work.genre === selectedGenre))
+
+  useEffect(() => {
+    console.log('毎回実行')
+  });
+
+  useEffect(() => {
+    console.log('初回のみ実行')
+  }, []);
+
+  useEffect(() => {
+    console.log(selectedGenre + 'に変更されたときに実行')
+  }, [selectedGenre]);
 
   return (
     <div className={styles.app}>
