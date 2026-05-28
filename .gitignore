@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+server/db.json
+package-lock.json
+
+.env
+.env.development
+
+test/fetch-test.mjs
