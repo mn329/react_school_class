@@ -1,6 +1,6 @@
 /* src/App.jsx */
 // useStateのインポート: 状態管理を行うためのReactのビルトイン関数
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './App.module.css'
 import Footer from './components/Footer'
 import Header from './components/Header'
@@ -8,8 +8,8 @@ import Modal from './components/Modal'
 import SearchBar from './components/SearchBar'
 import WorkList from './components/WorkList'
 // モックデータの読み込み
-import { works } from './data/works'
-import { useEffect } from 'react'
+// import { works } from './data/works'
+import useWorks from './hooks/useWorks';
 
 function App() {
   // 選択された作品のstate
@@ -17,6 +17,7 @@ function App() {
   const [selectedWork, setSelectedWork] = useState(null)
   const [query, setQuery] = useState("")
   const [selectedGenre, setSelectedGenre] = useState('すべて')
+  const { works } = useWorks()
   // ジャンルのリストをworksから抜き出す
   const genres = ['すべて', ...new Set(works.map((w) => w.genre))]
 
@@ -34,6 +35,8 @@ function App() {
     console.log(selectedGenre + 'に変更されたときに実行')
   }, [selectedGenre]);
 
+  // カスタムHooksを使って、works を読み込み
+  
   return (
     <div className={styles.app}>
       <Header />
