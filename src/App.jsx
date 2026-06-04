@@ -11,6 +11,7 @@ import WorkList from './components/WorkList'
 // import { works } from './data/works'
 import useWorks from './hooks/useWorks';
 import LoadingModal from './components/LoadingModal'
+import FlashMessage from './components/FlashMessage'
 
 function App() {
   // 選択された作品のstate
@@ -18,7 +19,7 @@ function App() {
   const [selectedWork, setSelectedWork] = useState(null)
   const [query, setQuery] = useState("")
   const [selectedGenre, setSelectedGenre] = useState('すべて')
-  const { works } = useWorks()
+  const { works, loading, error } = useWorks()
   // ジャンルのリストをworksから抜き出す
   const genres = ['すべて', ...new Set(works.map((w) => w.genre))]
 
@@ -40,8 +41,9 @@ function App() {
   
   return (
     <div className={styles.app}>
-      <LoadingModal isOpen={false} message='yomikomi' />
+      <LoadingModal isOpen={loading} message='yomikomi' />
       <Header />
+      <FlashMessage message={error} type='error' />
       <SearchBar query={query} onQueryChange={setQuery}  genres={genres} selectedGenre={selectedGenre} onGenreChange={setSelectedGenre}/>
       <main className={styles.main}>
         <h2 className={styles.sectionTitle}>作品リスト</h2>
