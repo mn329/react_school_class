@@ -10,6 +10,7 @@ import WorkList from './components/WorkList'
 // モックデータの読み込み
 // import { works } from './data/works'
 import useWorks from './hooks/useWorks';
+import LoadingModal from './components/LoadingModal'
 
 function App() {
   // 選択された作品のstate
@@ -39,6 +40,7 @@ function App() {
   
   return (
     <div className={styles.app}>
+      <LoadingModal isOpen={false} message='yomikomi' />
       <Header />
       <SearchBar query={query} onQueryChange={setQuery}  genres={genres} selectedGenre={selectedGenre} onGenreChange={setSelectedGenre}/>
       <main className={styles.main}>
