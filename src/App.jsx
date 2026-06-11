@@ -12,6 +12,8 @@ import WorkList from './components/WorkList'
 import useWorks from './hooks/useWorks';
 import LoadingModal from './components/LoadingModal'
 import FlashMessage from './components/FlashMessage'
+// テーマコンテキストの読み込み
+import { ThemeContext } from './context/ThemeContext'
 
 function App() {
   // 選択された作品のstate
@@ -24,6 +26,16 @@ function App() {
   const genres = ['すべて', ...new Set(works.map((w) => w.genre))]
 
   const filteredWorks = works.filter((work) => work.title.includes(query) && (selectedGenre === 'すべて' || work.genre === selectedGenre))
+  // テーマのstateを管理
+  const [theme, setTheme] = useState('dark')
+  // テーマ切り替え関数
+  const toggleTheme = () => {
+    // 現在のテーマが light なら dark に、dark なら light に切り替える
+    const currentTheme = (theme === 'light') ? 'dark' : 'light'
+    // テーマをStateに保存
+    setTheme(currentTheme)
+  }
+
 
   useEffect(() => {
     console.log('毎回実行')
@@ -37,10 +49,12 @@ function App() {
     console.log(selectedGenre + 'に変更されたときに実行')
   }, [selectedGenre]);
 
-  // カスタムHooksを使って、works を読み込み
-  
+
+  // テーマコンテキストの提供
+
   return (
-    <div className={styles.app}>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <div className={styles.app} data-theme={theme}>
       <LoadingModal isOpen={loading} message='yomikomi' />
       <Header />
       <FlashMessage message={error} type='error' />
@@ -59,6 +73,7 @@ function App() {
         <Modal work={selectedWork} onClose={() => {setSelectedWork(null)}} />
       )}
     </div>
+    </ThemeContext.Provider>
   )
 }
 
