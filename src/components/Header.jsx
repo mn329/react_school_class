@@ -1,6 +1,7 @@
 /* src/components/Header.jsx */
 import styles from './Header.module.css'
-import logo from '../assets/logo.svg'
+import logo from '../assets/logo.svg'   
+import ThemeButton from './ThemeButton'
 
 function Header() {
     return (
@@ -10,6 +11,7 @@ function Header() {
                     <img src={logo} alt="ロゴ" />
                 </div>
                 <h1 className={styles.title}>Anime Station</h1>
+                <ThemeButton />
             </div>
         </header>
     )
