@@ -1,7 +1,6 @@
-// src/context/ThemeContext.js
-import { createContext } from 'react'
+import { createContext } from "react";
 
 export const ThemeContext = createContext({
-  theme: 'light',
-  toggleTheme: () => {},
-})
+    theme: 'dark',
+    toggleTheme: () => {console.log('toggleTheme')}
+});
